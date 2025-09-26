@@ -7,11 +7,14 @@
 </head>
 <body>
     <header>
-        <h1>Bem vindo ao Estudo de Flask</h1>
+        <h1>Bem vindo {{context.usuario}} ao Estudo de Flask</h1>
     </header>
 
     <div>
-        <p>Estudo dedicado a Flask</p>
+        <p>Estudo dedicado a Flask {{context.idade}}</p>
+        <p>O velho tem  Anos</p>
     </div>
+
+    <a href="{{url_for('nova')}}" target="_blank">Acesse a outra pagina</a>
 </body>
 </html>
