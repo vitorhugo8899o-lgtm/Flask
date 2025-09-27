@@ -1,4 +1,4 @@
-from app import db
+from . import db
 from datetime import datetime, timezone 
 
 #definindo pro flask que isso é um banco de dados

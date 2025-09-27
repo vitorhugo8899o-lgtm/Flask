@@ -9,6 +9,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
-#from . import views > importa todas as rotas de maneira automatica
-from app.views import Homepage, nova 
-from app.models import Contato
+
+from . import models 
+from . import views 
