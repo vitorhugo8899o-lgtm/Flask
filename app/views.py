@@ -28,6 +28,18 @@ def contato():
     return render_template('Contato.html', context=context, form=form) 
 
 
+@app.route('/Contato/Lista',)
+def contatoLista():
+    dados = Contato.query.order_by('nome').all()
+
+    print(dados)
+
+    context = {'dados':dados}
+
+
+    return render_template('Contato_Lista.html', context=context)
+
+
 @app.route('/Contato_old/', methods=['GET', 'POST'])
 def Contato_old():
     context = {}
