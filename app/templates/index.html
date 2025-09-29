@@ -1,20 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <header>
-        <h1>Estudo Flask</h1>
-        <h3>Vítor hugo</h3>
-    </header>
+    
+    {% include 'nav.html' %} 
 
-    {% include 'nav.html' %}
-
-    <div>
-        {% if current_user.is_authenticated %}
-        <span class="btn btn-primary">{{current_user.nome}} {{current_user.sobrenome}}</span>
-        {% else %}
-        <a href="{{url_for('cadastro')}}" class="btn btn-primary">Faça seu cadastro</a>
-        {% endif %}
-        <hr>
-        <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logotipo">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        
+        <div class="card p-4 bg-secondary shadow-lg text-white" style="width: 100%; max-width: 400px;">
+            <h1 class="text-center text-light mb-4">Login</h1>
+            
+            <div class="mb-4 text-center">
+                {% if current_user.is_authenticated %}
+                    <span class="btn btn-success mb-2">{{current_user.nome}} {{current_user.sobrenome}}</span>
+                    
+                    <a href="{{ url_for('logout')}}" class="btn btn-outline-danger">Sair</a>
+                {% else %}
+                    {% endif %}
+            </div>
+            
+            <hr class="border-light-subtle">
+            
+            {% if not current_user.is_authenticated %}
+            <form action="" method="post" class="row g-3"> 
+                
+                {{ form.hidden_tag() }} 
+                
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        **Erro ao Entrar:** Por favor, corrija os campos abaixo.
+                    </div>
+                {% endif %}
+                
+                <div class="col-12">
+                    {{ form.email.label(class="form-label text-light") }}
+                    {{ form.email(class="form-control bg-dark text-light border-secondary") }}
+                    {% for error in form.email.errors %}
+                        <span class="text-warning">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="col-12">
+                    {{ form.senha.label(class="form-label text-light") }}
+                    {{ form.senha(class="form-control bg-dark text-light border-secondary") }}
+                    {% for error in form.senha.errors %}
+                        <span class="text-warning">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="col-12 mt-4">
+                    {{ form.btnSubmit(class='btn btn-light w-100')}}
+                </div>
+                
+                <div class="col-12 text-center mt-3">
+                    <p class="mb-0">
+                        Não tem Cadastro? 
+                        <a href="{{url_for('cadastro')}}" class="text-warning text-decoration-none fw-bold">Faça seu cadastro</a>
+                    </p>
+                </div>
+                
+            </form>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

@@ -1,20 +1,20 @@
 from . import app, db  
 from flask import render_template, url_for, request, redirect 
 from .models import Contato 
-from app.forms import ContatoForm, UserForm
+from app.forms import ContatoForm, UserForm, LoginForm
 from flask_login import login_user, logout_user, current_user
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def Homepage():
-    usuario='Vítor'
-    idade=34
-    context={
-        'usuario':usuario,
-        'idade':idade
-    }
+    form = LoginForm() 
+    
+    if form.validate_on_submit():
+        user = form.login()
+        login_user(user, remember=True)
+        return redirect(url_for('Homepage'))
 
-    return render_template('index.html',context=context)
+    return render_template('index.html', form=form)
 
 
 @app.route('/Cadastro/', methods=['GET', 'POST'])
@@ -26,6 +26,11 @@ def cadastro():
         return redirect(url_for('Homepage'))
     return render_template('Cadastro.html',form=form)
 
+
+@app.route('/Sair/')
+def logout():
+    logout_user()
+    return redirect(url_for('Homepage'))
 
 @app.route('/Contato/', methods=['GET', 'POST'])
 def contato():
