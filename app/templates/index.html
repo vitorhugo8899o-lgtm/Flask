@@ -9,8 +9,12 @@
     {% include 'nav.html' %}
 
     <div>
-        <p>Estudo dedicado a Flask {{context.idade}}</p>
-
+        {% if current_user.is_authenticated %}
+        <span class="btn btn-primary">{{current_user.nome}} {{current_user.sobrenome}}</span>
+        {% else %}
+        <a href="{{url_for('cadastro')}}" class="btn btn-primary">Faça seu cadastro</a>
+        {% endif %}
+        <hr>
         <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logotipo">
     </div>
 {% endblock %}

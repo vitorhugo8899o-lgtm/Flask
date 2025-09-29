@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <h3>Cadastro de Usuário</h3>
+        </div>
+        
+        <form action="" method="post" class="row mt-4"> 
+            
+            {{ form.hidden_tag() }} {% if form.errors %}
+                <div class="alert alert-danger">
+                    **Erro ao Enviar!** Por favor, corrija os campos destacados abaixo.
+                </div>
+            {% endif %}
+
+            <div class="col-12 mb-3">
+                {{ form.nome.label(class="form-label") }}
+                {{ form.nome(class="form-control") }}
+            </div>
+
+            <div class="col-12 mb-3">
+                {{ form.sobrenome.label(class="form-label") }}
+                {{ form.sobrenome(class="form-control") }}
+            </div>
+
+            <div class="col-12 mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+            </div>
+
+            <div class="col-12 mb-3">
+                {{ form.senha.label(class="form-label") }}
+                {{ form.senha(class="form-control", rows="5") }} 
+            </div>
+            <div class="col-12 mb-3">
+                {{ form.confirmacao_senha.label(class="form-label") }}
+                {{ form.confirmacao_senha(class="form-control", rows="5") }} 
+            </div>
+            <div class="col-12 mt-3">
+                {{ form.btnSubmit(class="btn btn-success") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
