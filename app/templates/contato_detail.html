@@ -1,10 +1,66 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
 
 
-{{obj.nome}}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1>Detalhes do Contato</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="nome" class="form-label fw-bold">Nome:</label>
+            <input 
+                type="text" 
+                id="nome"
+                value="{{obj.nome}}" 
+                class="form-control bg-dark text-white border-0" 
+                readonly
+            >
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label for="email" class="form-label fw-bold">E-mail:</label>
+            <input 
+                type="text" 
+                id="email"
+                value="{{obj.email}}" 
+                class="form-control bg-dark text-white border-0" 
+                readonly
+            >
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-12 mb-3">
+            <label for="assunto" class="form-label fw-bold">Assunto:</label>
+            <input 
+                type="text" 
+                id="assunto"
+                value="{{obj.assunto}}" 
+                class="form-control bg-dark text-white border-0" 
+                readonly
+            >
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-12 mb-3">
+            <label for="mensagem" class="form-label fw-bold">Mensagem:</label>
+            <textarea 
+                id="mensagem"
+                class="form-control bg-dark text-white border-0" 
+                rows="5" 
+                readonly
+            >{{obj.mensagem}}</textarea>
+        </div>
+    </div>
+    {% include 'nav.html' %}
+</div>
 
+</div>
 {% endblock %}
