@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudo Flask</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <header>
-        <h1>Bem vindo {{context.usuario}} ao Estudo de Flask</h1>
+        <h1>Estudo Flask</h1>
+        <h3>Vítor hugo</h3>
     </header>
+
+    {% include 'nav.html' %}
 
     <div>
         <p>Estudo dedicado a Flask {{context.idade}}</p>
-        <p>O velho tem  Anos</p>
-    </div>
 
-    <a href="{{url_for('contato')}}" target="_blank">contato</a>
-    <a href="{{url_for('contatoLista')}}" target="_blank" class="col-12">Contato - Lista</a>
-</body>
-</html>
+        <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logotipo">
+    </div>
+{% endblock %}

@@ -30,14 +30,24 @@ def contato():
 
 @app.route('/Contato/Lista',)
 def contatoLista():
-    dados = Contato.query.order_by('nome').all()
+    dados = Contato.query.order_by('nome')
 
-    print(dados)
+    if request.method == 'GET':
+        pesquisa = request.args.get('pesquisa','')
 
-    context = {'dados':dados}
+    if pesquisa != '':
+        dados = dados.filter_by(nome=pesquisa)
 
 
+    context = {'dados':dados.all()}
     return render_template('Contato_Lista.html', context=context)
+
+@app.route('/Contato/<int:id>/')
+
+def contatoDetail(id):
+    obj = Contato.query.get(id)
+
+    return render_template('contato_detail.html', obj=obj)
 
 
 @app.route('/Contato_old/', methods=['GET', 'POST'])
