@@ -3,7 +3,7 @@ from wtforms import StringField, TextAreaField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 
 from app import db, bcrypt
-from app.models import Contato, User
+from app.models import Contato, User, Post
 
 class UserForm(FlaskForm):
     nome = StringField('Nome',validators=[DataRequired()])
@@ -65,3 +65,17 @@ class ContatoForm(FlaskForm):
             )
         db.session.add(contato)
         db.session.commit()
+
+
+class PostForm(FlaskForm):
+    mensagem = TextAreaField('Mensagem',validators=[DataRequired()])
+    btnSubmit = SubmitField('Enviar')
+
+    def save(self, user_id):
+        post = Post(
+            mensagem = self.mensagem.data,
+            user_id = user_id
+        )
+
+        db.session.add(post)
+        db.session.commit()    
