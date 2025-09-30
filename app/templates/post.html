@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <h3>Post</h3>
+        </div>
+            {% include 'nav.html' %} 
+            
+            {# REMOVEMOS: {{ form.hidden_tag() }} {% if form.errors %}... {% endif %} #}
+
+            <div class="row">
+                <div class="col-12">
+                    <h5>Mensagem</h5>
+                    <hr>
+                    <div class="col-12 border rounded p-4 shadow">
+                        {{post.mensagem}}
+                    </div>
+                </div>
+                <div class="col-12 mt-3">
+                    <form action="" method="post" class="row mt-4"> 
+                
+                        {{ form.hidden_tag() }} {% if form.errors %}
+                            <div class="alert alert-danger">
+                                **Erro ao Enviar!** Por favor, corrija os campos destacados abaixo.
+                            </div>
+                        {% endif %}
+                        <div class="col-12 mb-3">
+                            {{ form.comentario.label(class="form-label") }}
+                            {{ form.comentario(class="form-control", rows="5") }} 
+                            {% for error in form.comentario.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-12 mt-3">
+                            {{ form.btnSubmit(class="btn btn-success") }}
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                <div class="col-12">
+                {% for c in post.comentario %} {# CORREÇÃO: Deve ser 'post.comentario' #}
+                <p>
+                    <b>Usuário</b>{{c.user.nome}}  {{c.user.sobrenome}} <br>
+                    {{c.comentario}}
+                </p>
+                <hr>
+                {% endfor %}
+            </div>
+            </div>
+    </div>
+{% endblock %}
